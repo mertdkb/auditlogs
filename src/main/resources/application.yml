@@ -1,0 +1,41 @@
+spring:
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}?allowPublicKeyRetrieval=true&useUnicode=yes&characterEncoding=UTF8&verifyServerCertificate=false&useSSL=false&requireSSL=false
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  security:
+    user:
+      name: developer
+      password: password
+  javers:
+    sqlSchema:
+      sqlSchemaManagementEnabled: true
+      sqlGlobalIdCacheDisabled: false
+      objectAccessHook: org.javers.hibernate.integration.HibernateUnproxyObjectAccessHook
+      sqlGlobalIdTableName: jv_global_id
+      sqlCommitTableName: jv_commit
+      sqlSnapshotTableName: jv_snapshot
+      sqlCommitPropertyTableName: jv_commit_property
+    mappingStyle: FIELD
+    algorithm: SIMPLE
+    commitIdGenerator: synchronized_sequence
+    prettyPrint: true
+    typeSafeValues: false
+    initialChanges: true
+    terminalChanges: true
+    packagesToScan:
+    auditableAspectEnabled: true
+    springDataAuditableRepositoryAspectEnabled: true
+    objectAccessHook:
+      usePrimitiveDefaults: true
+      prettyPrintDateFormats:
+        localDateTime: 'dd MMM yyyy, HH:mm:ss'
+        zonedDateTime: 'dd MMM yyyy, HH:mm:ssZ'
+        localDate: 'dd MMM yyyy'
+        localTime: 'HH:mm:ss'  
